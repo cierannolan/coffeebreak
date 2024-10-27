@@ -1,45 +1,99 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import window_closed from './assets/images/window closed.png';
 import window_open from './assets/images/window open.png';
 import rain from './assets/images/rain.gif';
 import rainClosed from './assets/audio/rain window.wav';
 import rainOpen from './assets/audio/rain outdoors.wav';
 import carSound from './assets/audio/city.wav';
+import catPurring from './assets/audio/cat purring.wav';
 import backdrop from './assets/images/city background.png';
 import playButton from './assets/images/play.png';
 import pauseButton from './assets/images/pause.png';
+import CircularSlider from 'react-circular-slider-svg';
 import './App.css';
 
 function App() {
     const [isWindowOpen, setIsWindowOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [carVolume, setCarVolume] = useState(0.5);
+    const [carVolume, setCarVolume] = useState(0.01);
+    const [catVolume, setCatVolume] = useState(0.01);
 
     const rainClosedAudioRef = useRef(new Audio(rainClosed));
     const rainOpenAudioRef = useRef(new Audio(rainOpen));
     const carAudioRef = useRef(new Audio(carSound));
+    const catPurringAudioRef = useRef(new Audio(catPurring));
+
+    const fadeOutIntervalRef = useRef(null);
+    const fadeInIntervalRef = useRef(null);
+
+    const clearCrossfadeIntervals = () => {
+        if (fadeOutIntervalRef.current) clearInterval(fadeOutIntervalRef.current);
+        if (fadeInIntervalRef.current) clearInterval(fadeInIntervalRef.current);
+    };
+
+    const crossfadeAudio = (fromAudioRef, toAudioRef) => {
+        clearCrossfadeIntervals();
+
+        const fadeOutDuration = 2000;
+        const fadeInDuration = 2000;
+
+        fadeOutIntervalRef.current = setInterval(() => {
+            if (fromAudioRef.current.volume > 0.05) {
+                fromAudioRef.current.volume -= 0.05;
+            } else {
+                fromAudioRef.current.volume = 0;
+                fromAudioRef.current.pause();
+                clearInterval(fadeOutIntervalRef.current);
+            }
+        }, fadeOutDuration / 20);
+
+        toAudioRef.current.volume = 0;
+        toAudioRef.current.play();
+
+        fadeInIntervalRef.current = setInterval(() => {
+            if (toAudioRef.current.volume < 0.95) {
+                toAudioRef.current.volume += 0.05;
+            } else {
+                toAudioRef.current.volume = 1;
+                clearInterval(fadeInIntervalRef.current);
+            }
+        }, fadeInDuration / 20);
+    };
 
     useEffect(() => {
         rainClosedAudioRef.current.loop = true;
         rainOpenAudioRef.current.loop = true;
         carAudioRef.current.loop = true;
+        catPurringAudioRef.current.loop = true;
 
         rainClosedAudioRef.current.volume = 1;
         rainOpenAudioRef.current.volume = 0;
         carAudioRef.current.volume = carVolume;
+        catPurringAudioRef.current.volume = catVolume;
 
         return () => {
+            clearCrossfadeIntervals();
             rainClosedAudioRef.current.pause();
             rainOpenAudioRef.current.pause();
             carAudioRef.current.pause();
+            catPurringAudioRef.current.pause();
         };
+    }, []);
+
+    useEffect(() => {
+        carAudioRef.current.volume = carVolume;
     }, [carVolume]);
+
+    useEffect(() => {
+        catPurringAudioRef.current.volume = catVolume;
+    }, [catVolume]);
 
     const togglePlayPause = () => {
         if (isPlaying) {
             rainOpenAudioRef.current.pause();
             rainClosedAudioRef.current.pause();
             carAudioRef.current.pause();
+            catPurringAudioRef.current.pause();
         } else {
             if (isWindowOpen) {
                 rainOpenAudioRef.current.play();
@@ -49,6 +103,7 @@ function App() {
                 rainClosedAudioRef.current.volume = 1;
             }
             carAudioRef.current.play();
+            catPurringAudioRef.current.play();
         }
         setIsPlaying(!isPlaying);
     };
@@ -57,11 +112,9 @@ function App() {
         setIsWindowOpen((prevState) => {
             if (isPlaying) {
                 if (prevState) {
-                    rainOpenAudioRef.current.pause();
-                    rainClosedAudioRef.current.play();
+                    crossfadeAudio(rainOpenAudioRef, rainClosedAudioRef);
                 } else {
-                    rainClosedAudioRef.current.pause();
-                    rainOpenAudioRef.current.play();
+                    crossfadeAudio(rainClosedAudioRef, rainOpenAudioRef);
                 }
             }
             return !prevState;
@@ -99,21 +152,59 @@ function App() {
                     src={isPlaying ? pauseButton : playButton}
                     alt="Play/Pause"
                     onClick={togglePlayPause}
-                    style={{ cursor: 'pointer', width: '50px', height: '50px' }}
+                    className="play-pause-button"
                 />
             </div>
             <div className="volume-control-container">
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={carVolume}
-                    onChange={(e) => setCarVolume(parseFloat(e.target.value))}
-                    className="volume-slider"
+                <CircularSlider
+                    size={100}
+                    trackWidth={8}
+                    minValue={0}
+                    maxValue={1}
+                    startAngle={40}
+                    endAngle={320}
+                    angleType={{
+                        direction: "cw",
+                        axis: "-y"
+                    }}
+                    handle1={{
+                        value: 0,
+                        onChange: v => v
+                    }}
+                    handle2={{
+                        value: carVolume,
+                        onChange: v => setCarVolume(v)
+                    }}
+                    arcColor="#c9c9c9"
+                    handleSize={0}
+                    arcBackgroundColor="#fff"
                 />
-                <label>Car Volume</label>
+                <CircularSlider
+                    size={100}
+                    trackWidth={8}
+                    minValue={0}
+                    maxValue={1}
+                    startAngle={40}
+                    endAngle={320}
+                    angleType={{
+                        direction: "cw",
+                        axis: "-y"
+                    }}
+                    handle1={{
+                        value: 0,
+                        onChange: v => v
+                    }}
+                    handle2={{
+                        value: catVolume,
+                        onChange: v => setCatVolume(v)
+                    }}
+                    arcColor="#c9c9c9"
+                    handleSize={0}
+                    arcBackgroundColor="#fff"
+                />
             </div>
+
+
         </div>
     );
 }
