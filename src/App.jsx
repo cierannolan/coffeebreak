@@ -10,6 +10,7 @@ import paw from './assets/images/paw.png';
 import plant from './assets/images/plant.png';
 import rain from './assets/images/rain.gif';
 import coffee from './assets/images/coffee.gif';
+import steam from './assets/images/steam.gif';
 import rainClosed from './assets/audio/rain window.wav';
 import rainOpen from './assets/audio/rain outdoors.wav';
 import carSound from './assets/audio/city.wav';
@@ -32,6 +33,8 @@ function App() {
     const [typingVolume, setTypingVolume] = useState(0.01);
     const [catVolume, setCatVolume] = useState(0.01);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [meowCount, setMeowCount] = useState(0)
+    const [visible, setVisible] = useState(true);
 
     const rainClosedAudioRef = useRef(new Audio(rainClosed));
     const rainOpenAudioRef = useRef(new Audio(rainOpen));
@@ -41,7 +44,6 @@ function App() {
     const typingAudioRef = useRef(new Audio(typing));
     const fadeOutIntervalRef = useRef(null);
     const fadeInIntervalRef = useRef(null);
-
 
     const clearCrossfadeIntervals = () => {
         if (fadeOutIntervalRef.current) clearInterval(fadeOutIntervalRef.current);
@@ -87,7 +89,7 @@ function App() {
         catPurringAudioRef.current.volume = catVolume * masterVolume;
         carAudioRef.current.volume = carVolume * masterVolume;
         typingAudioRef.current.volume = typingVolume * masterVolume;
-    }, [masterVolume, carVolume, catVolume, typingVolume]);
+    }, [masterVolume, carVolume, catVolume, typingVolume]); //master volume
 
     useEffect(() => {
         rainClosedAudioRef.current.loop = true;
@@ -105,7 +107,15 @@ function App() {
             catPurringAudioRef.current.pause();
             typingAudioRef.current.pause();
         };
-    }, []);
+    }, []); //loop init + pause
+
+    useEffect(() => {
+        if (meowCount > 0) {
+            setVisible(true);
+            const timer = setTimeout(() => setVisible(false), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [meowCount]); //fade-out for bagel counter
 
     const togglePlayPause = () => {
         if (isPlaying) {
@@ -144,8 +154,24 @@ function App() {
 
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
+    const meowClicked = () => {
+        catMeowAudioRef.current.play();
+        setMeowCount(meowCount+1)
+    }
+
     return (
         <div className="App">
+            {meowCount > 0 && (
+                <div
+                    className="meow-counter"
+                    style={{
+                        opacity: visible ? 1 : 0,
+                        transition: "opacity 1s ease-out",
+                    }}
+                >
+                    Bagel has been harassed&nbsp;<div className="meow-counter-number"> {meowCount} </div>&nbsp;times.
+                </div>
+            )}
             <div className="container">
                 <img className="table" src={table}/>
                 <div className="volume-bar"
@@ -167,11 +193,15 @@ function App() {
                 <div className="window-container">
                     <img className="window" src={isWindowOpen ? window_open : window_closed} alt="Window" />
                     <img className="plant" src={plant} alt="Plant" />
-                    <img className="coffee" src={coffee} alt="Coffee" />
+                    <div className="coffee-container">
+                        <img className="coffee" src={coffee} alt="Coffee" />
+                        <img className="steam" src={steam} alt="Steam" />
+                    </div>
+
                     <img className="cat" src={cat} alt="Cat" />
                     <div
                         className="cat-head-clickable"
-                        onClick={() => catMeowAudioRef.current.play()}
+                        onClick={() => meowClicked()}
                         style={{
                             position: 'absolute',
                             bottom: '7.5%',
@@ -275,7 +305,6 @@ function App() {
                         </div>
                     </div>
                 </div>
-
                 <div className="credits">
                     Created by <a href="">Cieran Nolan</a>
                 </div>
