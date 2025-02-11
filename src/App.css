@@ -154,7 +154,7 @@
     align-items: center;
 }
 
-.car, .paw, .computer {
+.icon {
     position: absolute;
     z-index: 10;
     width: 24px;
