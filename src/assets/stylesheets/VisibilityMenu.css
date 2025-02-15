@@ -37,5 +37,9 @@
     display: flex;
     align-items: center;
     gap: 0.5vw;
-    white-space: nowrap;
 }
+
+    .visibility-option input[type="checkbox"] {
+        min-width: 1rem;
+        min-height: 1rem;
+    }
