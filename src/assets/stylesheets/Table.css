@@ -1,0 +1,112 @@
+.coffee, .steam {
+    position: absolute;
+    display: flex;
+}
+
+.coffee {
+    top: 0%;
+    left: 42%;
+    width: 2.4%;
+    height: auto;
+    z-index: 2;
+}
+
+    .coffee.open {
+        top: -33.5%;
+        left: 35%;
+
+    }
+
+.steam {
+    opacity: 0.3;
+    width: 0.8%;
+    height: 3%;
+    top: -1.3%;
+    left: 42.8%;
+    z-index: 1;
+}
+
+    .steam.open {
+        top: -34.8%;
+        left: 35.8%;
+    }
+
+
+.table-container {
+    top: 70%;
+    position: relative;
+    display: block;
+    bottom: -60%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.table {
+    width: 50%;
+    z-index: -20;
+}
+
+.cat {
+    position: absolute;
+    top: -28%;
+    left: 28%;
+    width: 11%;
+    height: auto;
+    z-index: 200;
+}
+
+.cat.open {
+    position: absolute;
+    top: -61%;
+    left: 38.5%;
+    width: 11%;
+    height: auto;
+    z-index: 200;
+}
+
+.cat-head-clickable {
+    position: absolute;
+    top: -2%;
+    left: 30%;
+    width: 3%;
+    height: 8.5%;
+    cursor: pointer;
+    z-Index: 9999;
+}
+
+.cat-head-clickable.open {
+    position: absolute;
+    top: -35.5%;
+    left: 40.5%;
+    width: 3%;
+    height: 8.5%;
+    cursor: pointer;
+    z-Index: 9999;
+}
+
+.laptop {
+    position: absolute;
+    top: -16%;
+    left: 50%;
+    width: 9%;
+    height: auto;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.play-pause-button {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    bottom: 20%;
+    width: 15%;
+    height: auto;
+    z-index: 222;
+    opacity: 0.4;
+    transform: translateX(-50%);
+}
+
+    .play-pause-button:hover {
+        opacity: 1;
+    }
