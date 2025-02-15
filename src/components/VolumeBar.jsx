@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const VolumeBar = ({ volume, setVolume }) => {
+const VolumeBar = ({ volume, setVolume, visibilities }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -10,6 +10,7 @@ const VolumeBar = ({ volume, setVolume }) => {
             onMouseLeave={() => setIsHovered(false)}
             style={{
                 opacity: isHovered ? 0.8 : 0.25,
+                visibility: visibilities.master_volume ? 'visible' : 'hidden'
             }}
         >
             <input

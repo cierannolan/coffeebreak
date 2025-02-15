@@ -3,14 +3,13 @@
 import VolumeBar from './components/VolumeBar.jsx'
 import MeowCounter from './components/MeowCounter';
 import Window from './components/Window';
+import Table from './components/Table';
 import VolumeControls from './components/VolumeControls';
-import PlayPauseButton from './components/PlayPauseButton';
+import VisibilityMenu from './components/VisibilityMenu';
 
 import useAudio from './hooks/useAudio';
 import useCrossfade from './hooks/useCrossfade';
 import useFadeVisibility from './hooks/useFadeVisibility';
-
-import tableImg from './assets/images/table.png';
 
 import rainClosedSrc from './assets/audio/rain window.wav';
 import rainOpenSrc from './assets/audio/rain outdoors.wav';
@@ -20,6 +19,15 @@ import catPurringSrc from './assets/audio/cat purring.wav';
 import catMeowSrc from './assets/audio/meow.wav';
 
 import './App.css';
+import './assets/stylesheets/Window.css';
+import './assets/stylesheets/Table.css';
+import './assets/stylesheets/VolumeControl.css';
+import './assets/stylesheets/VolumeControls.css';
+import './assets/stylesheets/VolumeBar.css';
+import './assets/stylesheets/VisibilityMenu.css';
+import './assets/stylesheets/MeowCounter.css';
+
+
 
 function App() {
     const [masterVolume, setMasterVolume] = useState(1);
@@ -33,6 +41,16 @@ function App() {
         cat: 0.01,
     });
     const [meowCount, setMeowCount] = useState(0);
+
+    const [visibilities, setVisibilities] = useState({
+        cat: true,
+        table: true,
+        coffee: true,
+        plant: true,
+        master_volume: true,
+        volume_controls: true,
+        play_button: true,
+    });
 
     const visible = useFadeVisibility(meowCount);
 
@@ -97,24 +115,28 @@ function App() {
 
     return (
         <div className="App">
-            <MeowCounter meowCount={meowCount} visible={visible} />
-
+            <VisibilityMenu className="visibility-menu"
+                visibilities={visibilities}
+                setVisibilities={setVisibilities}
+            />
+            <MeowCounter meowCount={meowCount} visible={visible} visibilities={visibilities} />
             <div className="container">
-                <img className="table" src={tableImg} alt="Table" />
-                <VolumeBar volume={masterVolume} setVolume={setMasterVolume} />
-                <Window isWindowOpen={isWindowOpen} toggleWindow={toggleWindow} meowClicked={meowClicked} isPlaying={isPlaying} />
-                <PlayPauseButton isPlaying={isPlaying} togglePlayPause={togglePlayPause} />
+                <VolumeBar volume={masterVolume} setVolume={setMasterVolume} visibilities={visibilities} />
+                <Window isWindowOpen={isWindowOpen} toggleWindow={toggleWindow} meowClicked={meowClicked} isPlaying={isPlaying} visibilities={visibilities} />
+                <Table meowClicked={meowClicked} isPlaying={isPlaying} visibilities={visibilities} togglePlayPause={togglePlayPause} />
                 <VolumeControls
                     isMenuOpen={isMenuOpen}
                     toggleMenu={toggleMenu}
                     volumes={volumes}
                     setVolumes={setVolumes}
+                    visibilities={visibilities}
                 />
+                <div className="credits">
+                    Created by <a href="https://github.com/cierannolan" target="_blank" >Cieran Nolan</a>
+                </div>
             </div>
 
-            <div className="credits">
-                Created by <a href="https://github.com/cierannolan" target="_blank" >Cieran Nolan</a>
-            </div>
+
 
         </div>
     );

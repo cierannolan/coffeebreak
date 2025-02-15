@@ -1,0 +1,52 @@
+.menu {
+    position: absolute;
+    left: -8%;
+    width: 7.5%;
+    height: 50vh;
+    top: 20%;
+    background-color: rgba(97,117,90, 0.4);
+    transition: left 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: solid 0.25vw rgb(149,166,136);
+}
+
+    .menu.open {
+        left: -1%;
+    }
+
+.menu-toggle-button {
+    position: absolute;
+    left: 120%;
+    height: 1.2vh;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.menu-toggle-image {
+    height: 3vh;
+    width: 1vw
+}
+
+.volume-control-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.menu.open .menu-toggle-button img {
+    transform: rotate(180deg);
+}
+
+.icon {
+    position: absolute;
+    z-index: 10;
+    width: 16%;
+    height: 16%;
+    pointer-events: none;
+}
