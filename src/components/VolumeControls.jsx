@@ -10,11 +10,12 @@ const VolumeControls = ({
     toggleMenu,
     volumes,
     setVolumes,
+    visibilities,
 }) => (
 
-    <div className={`menu ${isMenuOpen ? 'open' : ''}`}>
+    <div className={`menu ${isMenuOpen ? 'open' : ''}`} style={{ visibility: visibilities.volume_controls ? 'visible' : 'hidden' }} >
         <button className="menu-toggle-button" onClick={toggleMenu}>
-            <img src={toggleIcon} alt="Menu Toggle" />
+            <img src={toggleIcon} className="menu-toggle-image" alt="Menu Toggle" />
         </button>
 
         <div className="volume-control-container">

@@ -1,0 +1,11 @@
+.meow-counter {
+    position: fixed;
+    top: 0.5%;
+    right: 0.5%;
+    font-family: "Tiny5";
+    color: #b9c0b7;
+}
+
+.meow-counter-number {
+    color: #e3984d;
+}
