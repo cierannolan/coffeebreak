@@ -1,8 +1,10 @@
+
+/* volume controls menu container */
 .menu {
     position: absolute;
-    left: -8%;
+    left: -8vw;
     width: 7.5%;
-    height: 50vh;
+    height: 50%;
     top: 20%;
     background-color: rgba(97,117,90, 0.4);
     transition: left 0.4s ease-in-out;
@@ -17,9 +19,11 @@
         left: -1%;
     }
 
+
+/* toggle button container + image */
 .menu-toggle-button {
     position: absolute;
-    left: 120%;
+    left: 9vw;
     height: 1.2vh;
     background: none;
     border: none;
@@ -29,9 +33,14 @@
 
 .menu-toggle-image {
     height: 3vh;
-    width: 1vw
 }
 
+.menu.open .menu-toggle-button img {
+    transform: rotate(180deg);
+}
+
+
+/* container for controls itself */
 .volume-control-container {
     display: flex;
     flex-direction: column;
@@ -39,14 +48,57 @@
     width: 100%;
 }
 
-.menu.open .menu-toggle-button img {
-    transform: rotate(180deg);
-}
 
+/* volume wheel icons */
 .icon {
     position: absolute;
     z-index: 10;
-    width: 16%;
-    height: 16%;
+    width: 1.5vw;
+    height: 3vh;
     pointer-events: none;
+}
+
+
+/* phone + tablet queries */
+@media (orientation: portrait) {
+    .menu {
+        position: absolute;
+        top: 80%;
+        height: 30vw;
+        width: 100%;
+        left: 0;
+        border: none;
+        background: none;
+        transition: top 0.4s ease-in-out;
+        flex-direction: row;
+    }
+
+    .volume-control-container {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+    }
+
+    .menu-toggle-button {
+        display: none;
+    }
+    
+    .icon {
+        width: 5vw;
+        height: 2.5vh;
+    }
+}
+
+
+/* tablet queries specifically */
+@media (orientation: portrait) and (min-width: 480px) {
+    .menu {
+        top: 75%;
+    }
+
+    .icon {
+        width: 5vw;
+        height: 4vh;
+    }
 }

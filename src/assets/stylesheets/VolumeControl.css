@@ -1,19 +1,15 @@
-.slider-cutout-container {
+.slider-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     padding-left: 1%;
-    border: solid yellow 1px
+
 }
 
-#CircularSlider {
-    height: 10vh;
-    width: 10vw;
-}
-
-.volume-wheel {
-    height: 100px !important;
-    width: 200px !important;
+@media (orientation: portrait) {
+    .slider-container {
+        padding-left: 0;
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 
 const VolumeBar = ({ volume, setVolume, visibilities }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -13,13 +14,33 @@ const VolumeBar = ({ volume, setVolume, visibilities }) => {
                 visibility: visibilities.master_volume ? 'visible' : 'hidden'
             }}
         >
-            <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={(e) => setVolume(Number(e.target.value))}
+            <Range
+                step={0.01}
+                min={0}
+                max={1}
+                values={[volume]}
+                onChange={(values) => setVolume(values[0])}
+                renderTrack={({ props, children }) => (
+                    <div {...props}
+                        style={{
+                            ...props.style,
+                            height: '1vh',
+                            margin: 'auto',
+                            width: '40%', 
+                            borderRadius: '0.5vh',
+                            background: getTrackBackground({
+                                min: 0,
+                                max: 1,
+                                values: [volume],
+                                colors: ['#FFF', '#AAA'],
+                            }),
+                        }}>
+                        {children}
+                    </div>
+                )}
+                renderThumb={({ props }) => (
+                    <div {...props} style={{ ...props.style, height: '50px', width: '24px', opacity: '0', }} />
+                )}
             />
         </div>
     );

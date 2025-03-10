@@ -6,7 +6,6 @@
     color: rgba(255, 255, 255, 0.87);
     background: linear-gradient(360deg, #7d8f79 60%, #73826f 60%);
     text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 a {
@@ -40,4 +39,11 @@ img {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* phone queries */
+@media (orientation: portrait) {
+    :root {
+        background: linear-gradient(360deg, #7d8f79 80%, #73826f 60%);
+    }
 }

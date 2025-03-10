@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import eye from "../assets/images/eye.png"
-import eye_closed from "../assets/images/eye_closed.png"
+import eyeClosed from "../assets/images/eye_closed.png"
 
 const VisibilityMenu = ({ setVisibilities, visibilities }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +28,7 @@ const VisibilityMenu = ({ setVisibilities, visibilities }) => {
         <div className="visibility-menu">
             <img
                 className="eye"
-                src={isMenuOpen ? eye_closed : eye}
+                src={isMenuOpen ? eyeClosed : eye}
                 onClick={toggleMenu}
                 alt="Toggle visibility menu"
             />

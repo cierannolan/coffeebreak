@@ -10,6 +10,22 @@
     overflow: hidden;
 }
 
+
+.play-pause-button {
+    position: absolute;
+    left: 50%;
+    width: auto;
+    height: 2.5vw;
+    z-index: 222;
+    opacity: 0.4;
+    transform: translateX(-50%);
+}
+
+    .play-pause-button:hover {
+        opacity: 1;
+    }
+
+
 .credits {
     position: absolute;
     bottom: 0;
@@ -17,6 +33,7 @@
     font-family: "Tiny5";
     color: white;
     text-decoration: none !important;
+    font-size: 1vw;
 }
 
     .credits a {
@@ -26,3 +43,16 @@
         .credits a:hover {
             color: #677563;
         }
+
+
+/* phone queries*/
+@media (orientation: portrait) and (max-width: 1024px) {
+    .credits {
+        font-size: 1rem;
+    }
+
+    .play-pause-button {
+        height: 6vh;
+        top: 70%;
+    }
+}

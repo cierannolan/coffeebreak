@@ -2,9 +2,12 @@
     position: relative;
     width: 40%;
     margin: auto;
-    top: 20%
+    top: 20vh;
+    height: 40vh;
 }
 
+
+/* images and clickable window */
 .window, .rain, .backdrop {
     position: absolute;
     top: 0;
@@ -13,21 +16,92 @@
     height: 40vh;
 }
 
+.right-half-clickable {
+    position: absolute;
+    top: 3vh;
+    left: 51%;
+    width: 43%;
+    height: 33vh;
+    cursor: pointer;
+    z-Index: 9999;
+}
+
 .window {
     z-index: -5;
+
 }
 
 .rain {
     z-index: -6;
+    opacity: 50%;
 }
 
 .backdrop {
     z-index: -7;
 }
 
+
+/* decor */
 .plant {
     position: absolute;
-    top: 28.3vh;
+    bottom: 5%;
     left: 2%;
-    width: 4vw;
+    width: auto;
+    height: 8vh;
+}
+
+
+/* phone queries */
+@media (orientation: portrait) and (max-width: 480px) {
+    .window-container {
+        width: 70%;
+        top: 10%;
+        height: 20vh;
+    }
+
+    .window, .rain, .backdrop {
+        width: 100%;
+        height: 20vh;
+    }
+
+    .right-half-clickable {
+        top: 2vh;
+        left: 51%;
+        width: 43%;
+        height: 16vh;
+    }
+
+    .plant {
+        position: relative;
+        bottom: -67%;
+        height: 6vh;
+    }
+}
+
+
+/* tablet queries*/
+@media (orientation: portrait) and (min-width: 481px) and (max-width: 1024px) {
+    .window-container {
+        width: 75%;
+        top: 10%;
+        height: 28vh;
+    }
+
+    .window, .rain, .backdrop {
+        width: 100%;
+        height: 28vh;
+    }
+
+    .right-half-clickable {
+        top: 2vh;
+        left: 51%;
+        width: 43%;
+        height: 23vh;
+    }
+
+    .plant {
+        position: relative;
+        bottom: -71%;
+        height: 7vh;
+    }
 }

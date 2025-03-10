@@ -3,19 +3,12 @@ import backdrop from '../assets/images/city background.png'
 import windowClosed from '../assets/images/window closed.png';
 import windowOpen from '../assets/images/window open.png';
 import plant from '../assets/images/plant.png';
-import coffee from '../assets/images/coffee.gif';
-import steam from '../assets/images/steam.gif';
-import cat from '../assets/images/bagel.gif';
 import rain from '../assets/images/rain.gif';
 
-const Window = ({ isWindowOpen, toggleWindow, meowClicked, isPlaying, visibilities }) => (
+const Window = ({ isWindowOpen, toggleWindow, isPlaying, visibilities }) => (
     <div className="window-container">
-        <div className="backdrop">
-            <img className="backdrop" src={backdrop} alt="Background" />
-        </div>
-        <div className="rain">
-            <img className="rain" src={isPlaying? rain : ""} alt="Rain" />
-        </div>
+        <img className="backdrop" src={backdrop} alt="Background" />
+        <img className="rain" src={rain} style={{ visibility: isPlaying ? 'visible' : 'hidden' }} alt={isPlaying ? 'rain' : ''} />
         <img
             className="window"
             src={isWindowOpen ? windowOpen : windowClosed}
@@ -25,16 +18,6 @@ const Window = ({ isWindowOpen, toggleWindow, meowClicked, isPlaying, visibiliti
         <div
             className="right-half-clickable"
             onClick={toggleWindow}
-            style={{
-                position: 'absolute',
-                top: '3vh',
-                left: '52%',
-                width: '43%',
-                height: '33vh',
-                cursor: 'pointer',
-                zIndex: 9999,
-                border: '1px solid yellow'
-            }}
         />
     </div>
 );
