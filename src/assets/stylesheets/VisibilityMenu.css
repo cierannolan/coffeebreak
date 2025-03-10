@@ -1,3 +1,4 @@
+/* visibility menu container */
 .visibility-menu {
     position: absolute;
     top: 1%;
@@ -5,21 +6,26 @@
     display: flex;
     flex-direction: row;
     font-family: "Tiny5";
-    font-size: 0.8vw
+    font-size: 0.8vw;
+    color: rgba(255, 255, 255, 0.87);
 }
 
+
+/* visibility options icon */
 .eye {
     position: relative;
     opacity: 0.4;
     cursor: pointer;
-    width: 2vw;
-    height: 2vh
+    width: 3vw;
+    height: 100%
 }
 
     .eye:hover {
         opacity: 0.8;
     }
 
+
+/* visibility menu items */
 .visibility-options {
     width: 100%;
     height: auto;
@@ -43,3 +49,27 @@
         min-width: 1rem;
         min-height: 1rem;
     }
+
+
+/* phone + tablet queries */
+@media (orientation: portrait) {
+    .visibility-menu {
+        left: 3%;
+        top: 1.5%;
+        font-size: 3vw;
+        flex-direction: column;
+        background-color: none;
+        z-index: 9999
+    }
+
+    .visibility-options {
+        top: 20px;
+        left: 0vw;
+        background-color: rgba(97, 117, 90, 0.6);
+        grid-template-columns: none
+    }
+
+    .eye {
+        width: 8vw
+    }
+}

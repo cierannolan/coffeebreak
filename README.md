@@ -1,8 +1,28 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Coffee Break ☕
 
-Currently, two official plugins are available:
+[Available online here!](http://cierannolan.github.io/coffeebreak)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+An interactive rain sounds application for study/sleep/relaxation, developed in React.
+
+Art drawn by myself, sounds courtesy of freesound.org.
+
+
+
+
+
+## Features
+
+- Additional background noises
+- Adjustable volume levels
+- Interactive environment
+- Responsive Layout
+
+
+## Installation
+Prerequesites:
+* npm
+```bash
+  npm install
+  npm start
+```

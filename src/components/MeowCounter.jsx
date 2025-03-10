@@ -10,10 +10,10 @@ const MeowCounter = ({ meowCount, visible, visibilities }) => (
             }}
         >
             {visibilities.cat ? 'Bagel' : 'The Ghost of Bagel'}&nbsp;has been harassed&nbsp;
-            <div className="meow-counter-number">{meowCount}</div>
+            <span className="meow-counter-number">{meowCount}</span> 
             &nbsp;times.
         </div>
     )
 );
-2 
+ 
 export default MeowCounter;
