@@ -23,6 +23,6 @@ Art drawn by myself, sounds courtesy of freesound.org.
 Prerequesites:
 * npm
 ```bash
-  npm run build
-  npm run preview
+  npm install
+  npm run dev
 ```
