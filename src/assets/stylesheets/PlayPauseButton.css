@@ -1,0 +1,40 @@
+
+.play-pause-button {
+    position: absolute;
+    left: 50%;
+    width: auto;
+    height: 2.5vw;
+    z-index: 222;
+    opacity: 0.4;
+    transform: translateX(-50%);
+}
+
+    .play-pause-button:hover {
+        opacity: 1;
+    }
+
+
+.ios-disclaimer {
+    position: absolute;
+    font-family: "Tiny5";
+    font-size: 1rem;
+    z-index: 2222;
+    background-color: rgba(97,117,90, 1);
+    border: solid 0.25vw rgb(149,166,136);
+    bottom: 9%;
+    width: 90%;
+    left: 2.5%;
+    padding: 2.5%
+}
+
+/* phone queries*/
+@media (orientation: portrait) and (max-width: 1024px) {
+    .play-pause-button {
+        height: 6vh;
+        top: 70%;
+    }
+
+    .play-pause-button.ios {
+        top: 77%
+    }
+}

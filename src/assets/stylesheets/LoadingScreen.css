@@ -1,0 +1,78 @@
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(97, 117, 90, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    font-family: "Tiny5";
+    color: rgba(255, 255, 255, 0.87);
+}
+
+    .loading-screen.fade-out {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+.loading-content {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.87);
+    width: 80%;
+    max-width: 400px;
+    padding: 1vw;
+    background-color: rgba(97, 117, 90, 1);
+    border: solid 0.25vw rgb(149, 166, 136);
+}
+
+    .loading-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.87);
+    }
+
+.loading-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(97, 117, 90, 1);
+
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: solid 0.25vw rgb(149, 166, 136);
+}
+
+.loading-bar {
+    height: 100%;
+    background-color: rgb(149, 166, 136);
+
+    transition: width 0.3s ease-out;
+}
+
+.loading-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255,1);
+}
+
+@media (orientation: portrait) {
+    .loading-content {
+        width: 90%;
+        padding: 3vw;
+        font-size: 3vw;
+    }
+
+        .loading-content h1 {
+            font-size: 5vw;
+        }
+
+    .loading-bar-container {
+        height: 4vw;
+    }
+
+    .loading-content p {
+        font-size: 3vw;
+    }
+}

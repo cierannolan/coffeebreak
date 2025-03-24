@@ -11,7 +11,7 @@ const useFadeVisibility = (trigger, duration = 1500) => {
         }
     }, [trigger, duration]);
 
-    return visible;
+    return [visible, setVisible];
 };
 
 export default useFadeVisibility;

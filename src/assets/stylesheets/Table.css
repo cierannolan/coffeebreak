@@ -241,10 +241,10 @@
 
     /* cat + clickable window */
     .cat {
-        top: -12%;
+        top: -11%;
         left: 26%;
-        width: 25vw;
-        height: 16vh
+        width: 27vw;
+        height: 15vh
     }
 
         .cat.open {
