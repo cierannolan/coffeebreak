@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import eye from "../assets/images/eye.png"
-import eyeClosed from "../assets/images/eye_closed.png"
+import eye from "../assets/images/eye.png";
+import eyeClosed from "../assets/images/eye_closed.png";
 
-const VisibilityMenu = ({ setVisibilities, visibilities }) => {
+const VisibilityMenu = ({ setVisibilities, visibilities, isIOSDevice }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -19,10 +19,15 @@ const VisibilityMenu = ({ setVisibilities, visibilities }) => {
         { key: 'table', label: 'Table' },
         { key: 'coffee', label: 'Coffee' },
         { key: 'plant', label: 'Plant' },
-        { key: 'master_volume', label: 'Master Volume' },
-        { key: 'volume_controls', label: 'Volume Controls' },
         { key: 'play_button', label: 'Play/Pause Button' }
     ];
+
+    if (!isIOSDevice) {
+        menuItems.push(
+            { key: 'master_volume', label: 'Master Volume' },
+            { key: 'volume_controls', label: 'Volume Controls' }
+        );
+    }
 
     return (
         <div className="visibility-menu">

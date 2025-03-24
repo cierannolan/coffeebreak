@@ -15,5 +15,5 @@ const MeowCounter = ({ meowCount, visible, visibilities }) => (
         </div>
     )
 );
- 
+
 export default MeowCounter;

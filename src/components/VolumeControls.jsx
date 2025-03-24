@@ -11,9 +11,10 @@ const VolumeControls = ({
     volumes,
     setVolumes,
     visibilities,
+    isIOSDevice
 }) => (
 
-    <div className={`menu ${isMenuOpen ? 'open' : ''}`} style={{ visibility: visibilities.volume_controls ? 'visible' : 'hidden' }} >
+    <div className={`menu ${isMenuOpen ? 'open' : ''}`} style={{ visibility: visibilities.volume_controls && !isIOSDevice ? 'visible' : 'hidden' }} >
         <button className="menu-toggle-button" onClick={toggleMenu}>
             <img src={toggle} className="menu-toggle-image" alt="Menu Toggle" />
         </button>
